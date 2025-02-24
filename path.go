@@ -5,10 +5,27 @@ import (
 	"strings"
 )
 
+// Type describing any file-system path in terms of its specific attributes,
+// including its root, directory, and entry elements.
+//
+// When parsing a path string, then the fullest establisable form is
+// obtained according to the following:
+//
+//	1 if the path is absolute, then the path is interpreted entirely without
+//	  reference to any other information;
+//	2 if the path is relative and a reference directory is provided, then
+//	  the path is interpreted as if relative to the reference;
+//	3 if the path is relative and a reference directory is not provided,
+//	  then the path is interpreted as is;
+//
+// Subject to the above, the input is converted to its fullest establishable
+// form for the purposes of parsing. Hence, for example the `Location` field
+// is usually the full path of the input path's directory, except in case 3
+// above.
 type PathDescriptor struct {
 	input          string   // The original input string to the parsing.
-	FullPath       string   // The full path, as formed from the input string and, if necessary, the reference directory.
-	Location       string   // The location of the entry, which is everything up-to-and-including the last (if any) path-name separator.
+	FullPath       string   // The fullest esablishable form of the input.
+	Location       string   // The fullest esablishable form of the location of the entry, which is everything up-to-and-including the last (if any) path-name separator.
 	Root           string   // The path root, if present.
 	Directory      string   // The path directory, which excluses the `Root` (if any) and the `Entry` (if any).
 	DirectoryParts []string // Array of the `directory` elements, split on the path-name separator.

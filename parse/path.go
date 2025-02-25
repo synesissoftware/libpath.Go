@@ -1,4 +1,4 @@
-package libpath
+package parse
 
 import (
 	angols_strings "github.com/synesissoftware/ANGoLS/strings"

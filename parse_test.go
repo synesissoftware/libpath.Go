@@ -1,13 +1,14 @@
 package libpath
 
 import (
+	"github.com/stretchr/testify/require"
+	"github.com/synesissoftware/libpath.Go/parse"
+
 	"strings"
 	"testing"
-
-	"github.com/stretchr/testify/require"
 )
 
-func checkPathDescriptorElements(t *testing.T, pd PathDescriptor) {
+func checkPathDescriptorElements(t *testing.T, pd parse.PathDescriptor) {
 	t.Helper()
 
 	// Stem + Extension => Entry
@@ -34,7 +35,7 @@ func checkPathDescriptorElements(t *testing.T, pd PathDescriptor) {
 func Test_empty(t *testing.T) {
 
 	{
-		pd, _ := ParsePathString("", "")
+		pd, _ := parse.ParsePathString("", "")
 
 		require.Equal(t, "", pd.FullPath)
 		require.Equal(t, "", pd.Location)
@@ -55,7 +56,7 @@ func Test_dot(t *testing.T) {
 
 	{
 		{
-			pd, _ := ParsePathString(".", "")
+			pd, _ := parse.ParsePathString(".", "")
 
 			require.Equal(t, ".", pd.FullPath)
 			require.Equal(t, "", pd.Location)
@@ -72,7 +73,7 @@ func Test_dot(t *testing.T) {
 		}
 
 		{
-			pd, _ := ParsePathString("..", "")
+			pd, _ := parse.ParsePathString("..", "")
 
 			require.Equal(t, "..", pd.FullPath)
 			require.Equal(t, "", pd.Location)
@@ -89,7 +90,7 @@ func Test_dot(t *testing.T) {
 		}
 
 		{
-			pd, _ := ParsePathString("...", "")
+			pd, _ := parse.ParsePathString("...", "")
 
 			require.Equal(t, "...", pd.FullPath)
 			require.Equal(t, "", pd.Location)
@@ -106,7 +107,7 @@ func Test_dot(t *testing.T) {
 		}
 
 		{
-			pd, _ := ParsePathString(".....", "")
+			pd, _ := parse.ParsePathString(".....", "")
 
 			require.Equal(t, ".....", pd.FullPath)
 			require.Equal(t, "", pd.Location)
@@ -123,7 +124,7 @@ func Test_dot(t *testing.T) {
 		}
 
 		{
-			pd, _ := ParsePathString("..abc.def..", "")
+			pd, _ := parse.ParsePathString("..abc.def..", "")
 
 			require.Equal(t, "..abc.def..", pd.FullPath)
 			require.Equal(t, "", pd.Location)
@@ -146,7 +147,7 @@ func Test_dot(t *testing.T) {
 func Test_Parse_Stem_only(t *testing.T) {
 
 	{
-		pd, _ := ParsePathString("abc", "")
+		pd, _ := parse.ParsePathString("abc", "")
 
 		require.Equal(t, "abc", pd.FullPath)
 		require.Equal(t, "", pd.Location)
@@ -163,7 +164,7 @@ func Test_Parse_Stem_only(t *testing.T) {
 	}
 
 	{
-		pd, _ := ParsePathString("abc", "/")
+		pd, _ := parse.ParsePathString("abc", "/")
 
 		require.Equal(t, "/abc", pd.FullPath)
 		require.Equal(t, "/", pd.Location)
@@ -180,7 +181,7 @@ func Test_Parse_Stem_only(t *testing.T) {
 	}
 
 	{
-		pd, _ := ParsePathString("abc", ".")
+		pd, _ := parse.ParsePathString("abc", ".")
 
 		require.Equal(t, "./abc", pd.FullPath)
 		require.Equal(t, "./", pd.Location)
@@ -198,7 +199,7 @@ func Test_Parse_Stem_only(t *testing.T) {
 	}
 
 	{
-		pd, _ := ParsePathString("abc", "./")
+		pd, _ := parse.ParsePathString("abc", "./")
 
 		require.Equal(t, "./abc", pd.FullPath)
 		require.Equal(t, "./", pd.Location)
@@ -216,7 +217,7 @@ func Test_Parse_Stem_only(t *testing.T) {
 	}
 
 	{
-		pd, _ := ParsePathString("abc", "..")
+		pd, _ := parse.ParsePathString("abc", "..")
 
 		require.Equal(t, "../abc", pd.FullPath)
 		require.Equal(t, "../", pd.Location)
@@ -234,7 +235,7 @@ func Test_Parse_Stem_only(t *testing.T) {
 	}
 
 	{
-		pd, _ := ParsePathString("abc", "../")
+		pd, _ := parse.ParsePathString("abc", "../")
 
 		require.Equal(t, "../abc", pd.FullPath)
 		require.Equal(t, "../", pd.Location)
@@ -252,7 +253,7 @@ func Test_Parse_Stem_only(t *testing.T) {
 	}
 
 	{
-		pd, _ := ParsePathString("abc", "/dir-1/dir-2")
+		pd, _ := parse.ParsePathString("abc", "/dir-1/dir-2")
 
 		require.Equal(t, "/dir-1/dir-2/abc", pd.FullPath)
 		require.Equal(t, "/dir-1/dir-2/", pd.Location)
@@ -270,7 +271,7 @@ func Test_Parse_Stem_only(t *testing.T) {
 	}
 
 	{
-		pd, _ := ParsePathString("abc", "dir-1/dir-2")
+		pd, _ := parse.ParsePathString("abc", "dir-1/dir-2")
 
 		require.Equal(t, "dir-1/dir-2/abc", pd.FullPath)
 		require.Equal(t, "dir-1/dir-2/", pd.Location)
@@ -291,7 +292,7 @@ func Test_Parse_Stem_only(t *testing.T) {
 func Test_Parse_Basename_only(t *testing.T) {
 
 	{
-		pd, _ := ParsePathString("abc.ex", "")
+		pd, _ := parse.ParsePathString("abc.ex", "")
 
 		require.Equal(t, "abc.ex", pd.FullPath)
 		require.Equal(t, "", pd.Location)
@@ -308,7 +309,7 @@ func Test_Parse_Basename_only(t *testing.T) {
 	}
 
 	{
-		pd, _ := ParsePathString("abc.ex", "/")
+		pd, _ := parse.ParsePathString("abc.ex", "/")
 
 		require.Equal(t, "/abc.ex", pd.FullPath)
 		require.Equal(t, "/", pd.Location)
@@ -325,7 +326,7 @@ func Test_Parse_Basename_only(t *testing.T) {
 	}
 
 	{
-		pd, _ := ParsePathString("abc.ex", "./")
+		pd, _ := parse.ParsePathString("abc.ex", "./")
 
 		require.Equal(t, "./abc.ex", pd.FullPath)
 		require.Equal(t, "./", pd.Location)
@@ -343,7 +344,7 @@ func Test_Parse_Basename_only(t *testing.T) {
 	}
 
 	{
-		pd, _ := ParsePathString("abc.ex", "/dir-1/dir-2")
+		pd, _ := parse.ParsePathString("abc.ex", "/dir-1/dir-2")
 
 		require.Equal(t, "/dir-1/dir-2/abc.ex", pd.FullPath)
 		require.Equal(t, "/dir-1/dir-2/", pd.Location)
@@ -361,7 +362,7 @@ func Test_Parse_Basename_only(t *testing.T) {
 	}
 
 	{
-		pd, _ := ParsePathString("abc.ex", "dir-1/dir-2")
+		pd, _ := parse.ParsePathString("abc.ex", "dir-1/dir-2")
 
 		require.Equal(t, "dir-1/dir-2/abc.ex", pd.FullPath)
 		require.Equal(t, "dir-1/dir-2/", pd.Location)
@@ -382,7 +383,7 @@ func Test_Parse_Basename_only(t *testing.T) {
 func Test_Parse_Extension_only(t *testing.T) {
 
 	{
-		pd, _ := ParsePathString(".ex", "")
+		pd, _ := parse.ParsePathString(".ex", "")
 
 		require.Equal(t, ".ex", pd.FullPath)
 		require.Equal(t, "", pd.Location)
@@ -399,7 +400,7 @@ func Test_Parse_Extension_only(t *testing.T) {
 	}
 
 	{
-		pd, _ := ParsePathString(".ex", "/")
+		pd, _ := parse.ParsePathString(".ex", "/")
 
 		require.Equal(t, "/.ex", pd.FullPath)
 		require.Equal(t, "/", pd.Location)
@@ -416,7 +417,7 @@ func Test_Parse_Extension_only(t *testing.T) {
 	}
 
 	{
-		pd, _ := ParsePathString(".ex", "./")
+		pd, _ := parse.ParsePathString(".ex", "./")
 
 		require.Equal(t, "./.ex", pd.FullPath)
 		require.Equal(t, "./", pd.Location)
@@ -434,7 +435,7 @@ func Test_Parse_Extension_only(t *testing.T) {
 	}
 
 	{
-		pd, _ := ParsePathString(".ex", "/dir-1/dir-2")
+		pd, _ := parse.ParsePathString(".ex", "/dir-1/dir-2")
 
 		require.Equal(t, "/dir-1/dir-2/.ex", pd.FullPath)
 		require.Equal(t, "/dir-1/dir-2/", pd.Location)
@@ -452,7 +453,7 @@ func Test_Parse_Extension_only(t *testing.T) {
 	}
 
 	{
-		pd, _ := ParsePathString(".ex", "dir-1/dir-2")
+		pd, _ := parse.ParsePathString(".ex", "dir-1/dir-2")
 
 		require.Equal(t, "dir-1/dir-2/.ex", pd.FullPath)
 		require.Equal(t, "dir-1/dir-2/", pd.Location)
@@ -473,7 +474,7 @@ func Test_Parse_Extension_only(t *testing.T) {
 func Test_Parse_Directory_only(t *testing.T) {
 
 	{
-		pd, _ := ParsePathString("abc/", "")
+		pd, _ := parse.ParsePathString("abc/", "")
 
 		require.Equal(t, "abc/", pd.FullPath)
 		require.Equal(t, "abc/", pd.Location)
@@ -491,7 +492,7 @@ func Test_Parse_Directory_only(t *testing.T) {
 	}
 
 	{
-		pd, _ := ParsePathString("abc/", "/")
+		pd, _ := parse.ParsePathString("abc/", "/")
 
 		require.Equal(t, "/abc/", pd.FullPath)
 		require.Equal(t, "/abc/", pd.Location)
@@ -509,7 +510,7 @@ func Test_Parse_Directory_only(t *testing.T) {
 	}
 
 	{
-		pd, _ := ParsePathString("abc/", "./")
+		pd, _ := parse.ParsePathString("abc/", "./")
 
 		require.Equal(t, "./abc/", pd.FullPath)
 		require.Equal(t, "./abc/", pd.Location)
@@ -532,7 +533,7 @@ func Test_Parse_AbsolutePath_ensuring_ignoring_ReferenceDirectory(t *testing.T) 
 	/* path = "/" */
 	{
 		{
-			pd, _ := ParsePathString("/", "")
+			pd, _ := parse.ParsePathString("/", "")
 
 			require.Equal(t, "/", pd.FullPath)
 			require.Equal(t, "/", pd.Location)
@@ -549,7 +550,7 @@ func Test_Parse_AbsolutePath_ensuring_ignoring_ReferenceDirectory(t *testing.T) 
 		}
 
 		{
-			pd, _ := ParsePathString("/", "abc")
+			pd, _ := parse.ParsePathString("/", "abc")
 
 			require.Equal(t, "/", pd.FullPath)
 			require.Equal(t, "/", pd.Location)
@@ -566,7 +567,7 @@ func Test_Parse_AbsolutePath_ensuring_ignoring_ReferenceDirectory(t *testing.T) 
 		}
 
 		{
-			pd, _ := ParsePathString("/", "/dir-1/dir-2")
+			pd, _ := parse.ParsePathString("/", "/dir-1/dir-2")
 
 			require.Equal(t, "/", pd.FullPath)
 			require.Equal(t, "/", pd.Location)
@@ -586,7 +587,7 @@ func Test_Parse_AbsolutePath_ensuring_ignoring_ReferenceDirectory(t *testing.T) 
 	/* path = "/dir-1/dir-2/" */
 	{
 		{
-			pd, _ := ParsePathString("/dir-1/dir-2/", "")
+			pd, _ := parse.ParsePathString("/dir-1/dir-2/", "")
 
 			require.Equal(t, "/dir-1/dir-2/", pd.FullPath)
 			require.Equal(t, "/dir-1/dir-2/", pd.Location)
@@ -604,7 +605,7 @@ func Test_Parse_AbsolutePath_ensuring_ignoring_ReferenceDirectory(t *testing.T) 
 		}
 
 		{
-			pd, _ := ParsePathString("/dir-1/dir-2/", "abc")
+			pd, _ := parse.ParsePathString("/dir-1/dir-2/", "abc")
 
 			require.Equal(t, "/dir-1/dir-2/", pd.FullPath)
 			require.Equal(t, "/dir-1/dir-2/", pd.Location)
@@ -622,7 +623,7 @@ func Test_Parse_AbsolutePath_ensuring_ignoring_ReferenceDirectory(t *testing.T) 
 		}
 
 		{
-			pd, _ := ParsePathString("/dir-1/dir-2/", "/dir-1/dir-2")
+			pd, _ := parse.ParsePathString("/dir-1/dir-2/", "/dir-1/dir-2")
 
 			require.Equal(t, "/dir-1/dir-2/", pd.FullPath)
 			require.Equal(t, "/dir-1/dir-2/", pd.Location)
@@ -643,7 +644,7 @@ func Test_Parse_AbsolutePath_ensuring_ignoring_ReferenceDirectory(t *testing.T) 
 	/* path = "/dir-1/dir-2/file.ext" */
 	{
 		{
-			pd, _ := ParsePathString("/dir-1/dir-2/file.ext", "")
+			pd, _ := parse.ParsePathString("/dir-1/dir-2/file.ext", "")
 
 			require.Equal(t, "/dir-1/dir-2/file.ext", pd.FullPath)
 			require.Equal(t, "/dir-1/dir-2/", pd.Location)
@@ -661,7 +662,7 @@ func Test_Parse_AbsolutePath_ensuring_ignoring_ReferenceDirectory(t *testing.T) 
 		}
 
 		{
-			pd, _ := ParsePathString("/dir-1/dir-2/file.ext", "abc")
+			pd, _ := parse.ParsePathString("/dir-1/dir-2/file.ext", "abc")
 
 			require.Equal(t, "/dir-1/dir-2/file.ext", pd.FullPath)
 			require.Equal(t, "/dir-1/dir-2/", pd.Location)
@@ -679,7 +680,7 @@ func Test_Parse_AbsolutePath_ensuring_ignoring_ReferenceDirectory(t *testing.T) 
 		}
 
 		{
-			pd, _ := ParsePathString("/dir-1/dir-2/file.ext", "/dir-1/dir-2")
+			pd, _ := parse.ParsePathString("/dir-1/dir-2/file.ext", "/dir-1/dir-2")
 
 			require.Equal(t, "/dir-1/dir-2/file.ext", pd.FullPath)
 			require.Equal(t, "/dir-1/dir-2/", pd.Location)

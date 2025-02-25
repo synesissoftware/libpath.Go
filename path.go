@@ -1,7 +1,8 @@
 package libpath
 
 import (
-	"path/filepath"
+	angols_strings "github.com/synesissoftware/ANGoLS/strings"
+
 	"strings"
 )
 
@@ -39,27 +40,35 @@ func (pd PathDescriptor) NumberOfDotsDirectoryParts() int {
 	r := 0
 
 	for _, dp := range pd.DirectoryParts {
-		if isDotsDirectoryPart(dp) {
+		switch countDotsDirectoryPart(dp) {
+		case 1:
+			fallthrough
+		case 2:
 			r += 1
+		default:
 		}
 	}
 
 	return r
 }
 
-func isDotsDirectoryPart(s string) bool {
-	switch s {
-	case ".":
-		return true
-	case "./":
-		return true
-	case "..":
-		return true
-	case "../":
-		return true
-	default:
-		return false
+func countDotsDirectoryPart(s string) int {
+
+	ix_no := angols_strings.IndexNotAnyAfter(s, "./", -1)
+
+	if -1 != ix_no {
+		return 0
 	}
+
+	for len(s) > 1 {
+		if elementEndsWithPathNameSeparator(s) {
+			s = s[:len(s)-1]
+		} else {
+			break
+		}
+	}
+
+	return len(s)
 }
 
 func elementIsRoot(s string) bool {
@@ -72,6 +81,14 @@ func elementIsRoot(s string) bool {
 	}
 }
 
+func byteIsPathElementSeparator(c byte) bool {
+	return '/' == c
+}
+
+func charIsPathElementSeparator(c rune) bool {
+	return '/' == c
+}
+
 func elementEndsWithPathNameSeparator(s string) bool {
 	switch len(s) {
 	case 0:
@@ -79,7 +96,21 @@ func elementEndsWithPathNameSeparator(s string) bool {
 		return false
 	default:
 
-		return '/' == s[len(s)-1]
+		return byteIsPathElementSeparator(s[len(s)-1])
+	}
+}
+
+func pathIsAbsolute(path string) bool {
+	return unixPathIsAbsolute(path)
+}
+
+func unixPathIsAbsolute(path string) bool {
+	if 0 == len(path) {
+
+		return false
+	} else {
+
+		return '/' == path[0]
 	}
 }
 
@@ -120,6 +151,25 @@ func simplePathSplit(path string) (string, []string, string, error) {
 	directory_parts = splits[dp_from:dp_count]
 
 	return root, directory_parts, file_part, nil
+}
+
+/* NOTE: if base name ends with '.', then no extension is obtained;
+ * otherwise has the normal semantics
+ */
+func splitBasename(base_name string) (file_stem, file_ext string) {
+
+	lix_dot := strings.LastIndexByte(base_name, '.')
+
+	if lix_dot < 0 || lix_dot == len(base_name)-1 {
+
+		file_stem = base_name
+	} else {
+
+		file_stem = base_name[:lix_dot]
+		file_ext = base_name[lix_dot:]
+	}
+
+	return
 }
 
 func basename(path string) string {
@@ -175,7 +225,7 @@ func createPathDescriptor(path string, ref_dir string) (PathDescriptor, error) {
 	pd.input = path
 	full_path := path
 
-	if !filepath.IsAbs(path) && 0 != len(ref_dir) {
+	if !pathIsAbsolute(path) && 0 != len(ref_dir) {
 		full_path = simplePathJoin(ref_dir, path)
 	}
 
@@ -185,12 +235,9 @@ func createPathDescriptor(path string, ref_dir string) (PathDescriptor, error) {
 	 */
 
 	directory := simplePathJoin(directory_parts...)
-	// location := simplePathJoin(root, directory_parts...)
 	location := simplePathJoin(root, directory)
-	// file_base := filepath.Base(full_path)
 	file_base := basename(file_part)
-	file_ext := filepath.Ext(full_path)
-	file_stem := file_base[0:(len(file_base) - len(file_ext))]
+	file_stem, file_ext := splitBasename(file_base)
 
 	// pd.input
 	pd.FullPath = full_path

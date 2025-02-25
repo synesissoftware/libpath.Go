@@ -2,7 +2,7 @@ package parse
 
 import (
 	angols_strings "github.com/synesissoftware/ANGoLS/strings"
-	lp_parse "github.com/synesissoftware/libpath.Go/util"
+	lp_util "github.com/synesissoftware/libpath.Go/util"
 
 	"strings"
 )
@@ -88,7 +88,7 @@ func elementEndsWithPathNameSeparator(s string) bool {
 		return false
 	default:
 
-		return lp_parse.ByteIsPathElementSeparator(s[len(s)-1])
+		return lp_util.ByteIsPathElementSeparator(s[len(s)-1])
 	}
 }
 
@@ -129,25 +129,6 @@ func simplePathSplit(path string) (string, []string, string, error) {
 	directory_parts = splits[dp_from:dp_count]
 
 	return root, directory_parts, file_part, nil
-}
-
-/* NOTE: if base name ends with '.', then no extension is obtained;
- * otherwise has the normal semantics
- */
-func splitBasename(base_name string) (file_stem, file_ext string) {
-
-	lix_dot := strings.LastIndexByte(base_name, '.')
-
-	if lix_dot < 0 || lix_dot == len(base_name)-1 {
-
-		file_stem = base_name
-	} else {
-
-		file_stem = base_name[:lix_dot]
-		file_ext = base_name[lix_dot:]
-	}
-
-	return
 }
 
 func simplePathJoin(elems ...string) string {
@@ -193,7 +174,7 @@ func createPathDescriptor(path string, ref_dir string) (PathDescriptor, error) {
 	pd.input = path
 	full_path := path
 
-	if !lp_parse.PathIsAbsolute(path) && 0 != len(ref_dir) {
+	if !lp_util.PathIsAbsolute(path) && 0 != len(ref_dir) {
 		full_path = simplePathJoin(ref_dir, path)
 	}
 
@@ -201,8 +182,8 @@ func createPathDescriptor(path string, ref_dir string) (PathDescriptor, error) {
 
 	directory := simplePathJoin(directory_parts...)
 	location := simplePathJoin(root, directory)
-	file_base := lp_parse.Basename(file_part)
-	file_stem, file_ext := splitBasename(file_base)
+	file_base := lp_util.Basename(file_part)
+	file_stem, file_ext := lp_util.SplitBasename(file_base)
 
 	// pd.input
 	pd.FullPath = full_path

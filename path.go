@@ -28,9 +28,9 @@ type PathDescriptor struct {
 	FullPath       string   // The fullest esablishable form of the input.
 	Location       string   // The fullest esablishable form of the location of the entry, which is everything up-to-and-including the last (if any) path-name separator.
 	Root           string   // The path root, if present.
-	Directory      string   // The path directory, which excluses the `Root` (if any) and the `Entry` (if any).
+	Directory      string   // The path directory, which excluses the `Root` (if any) and the `Basename` (if any).
 	DirectoryParts []string // Array of the `directory` elements, split on the path-name separator.
-	Entry          string   // The "file part", if any, which occurs after the last (if any) path-name separator.
+	Basename       string   // The "file part", if any, which occurs after the last (if any) path-name separator.
 	Stem           string   // The stem of the "file part", if any.
 	Extension      string   // The extension of the "file part", if any.
 }
@@ -132,12 +132,12 @@ func simplePathSplit(path string) (string, []string, string, error) {
 
 	var root string
 	var directory_parts []string
-	var file_part string
+	var basename string
 
 	if elementEndsWithPathNameSeparator(last) {
-		file_part = ""
+		basename = ""
 	} else {
-		file_part = last
+		basename = last
 		dp_count -= 1
 	}
 
@@ -150,23 +150,23 @@ func simplePathSplit(path string) (string, []string, string, error) {
 
 	directory_parts = splits[dp_from:dp_count]
 
-	return root, directory_parts, file_part, nil
+	return root, directory_parts, basename, nil
 }
 
 /* NOTE: if base name ends with '.', then no extension is obtained;
  * otherwise has the normal semantics
  */
-func splitBasename(base_name string) (file_stem, file_ext string) {
+func splitBasename(base_name string) (stem, extension string) {
 
 	lix_dot := strings.LastIndexByte(base_name, '.')
 
 	if lix_dot < 0 || lix_dot == len(base_name)-1 {
 
-		file_stem = base_name
+		stem = base_name
 	} else {
 
-		file_stem = base_name[:lix_dot]
-		file_ext = base_name[lix_dot:]
+		stem = base_name[:lix_dot]
+		extension = base_name[lix_dot:]
 	}
 
 	return
@@ -229,25 +229,20 @@ func createPathDescriptor(path string, ref_dir string) (PathDescriptor, error) {
 		full_path = simplePathJoin(ref_dir, path)
 	}
 
-	root, directory_parts, file_part, _ := simplePathSplit(full_path)
-
-	/*
-	 */
+	root, directory_parts, basename, _ := simplePathSplit(full_path)
 
 	directory := simplePathJoin(directory_parts...)
 	location := simplePathJoin(root, directory)
-	file_base := basename(file_part)
-	file_stem, file_ext := splitBasename(file_base)
+	stem, extension := splitBasename(basename)
 
-	// pd.input
 	pd.FullPath = full_path
 	pd.Location = location
 	pd.Root = root
 	pd.Directory = directory
 	pd.DirectoryParts = directory_parts
-	pd.Entry = file_base
-	pd.Stem = file_stem
-	pd.Extension = file_ext
+	pd.Basename = basename
+	pd.Stem = stem
+	pd.Extension = extension
 
 	return pd, nil
 }

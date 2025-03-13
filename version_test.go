@@ -1,9 +1,9 @@
 package libpath
 
 import (
-	"testing"
-
 	"github.com/stretchr/testify/require"
+
+	"testing"
 )
 
 const (

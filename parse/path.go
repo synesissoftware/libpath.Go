@@ -1,8 +1,18 @@
+// Copyright 2019-2025, Matthew Wilson and Synesis Information Systems. All
+// rights reserved. Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+/*
+ * Created: 25th February 2025
+ * Updated: 13th March 2025
+ */
+
 package parse
 
 import (
-	angols_strings "github.com/synesissoftware/ANGoLS/strings"
 	lp_util "github.com/synesissoftware/libpath.Go/util"
+
+	angols_strings "github.com/synesissoftware/ANGoLS/strings"
 
 	"strings"
 )

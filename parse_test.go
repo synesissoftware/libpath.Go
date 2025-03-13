@@ -1,8 +1,9 @@
 package libpath
 
 import (
-	"github.com/stretchr/testify/require"
 	"github.com/synesissoftware/libpath.Go/parse"
+
+	"github.com/stretchr/testify/require"
 
 	"strings"
 	"testing"

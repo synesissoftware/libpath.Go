@@ -8,6 +8,8 @@ github.com/synesissoftware/ANGOLS v0.5.0 h1:iGJB+avcC/CHmJOQFN+DEoeYmaEBN9mLggwe
 github.com/synesissoftware/ANGOLS v0.5.0/go.mod h1:fKRz1siyIxNehLwa4x58XBdX/siCSvu51q6gVU47nR0=
 github.com/synesissoftware/ANGoLS v0.0.0-20250224083451-65fa75e658d1 h1:PRjwezOakpvjrpI2QfLrqEO274lEVSZVpFFnF8aMGxU=
 github.com/synesissoftware/ANGoLS v0.0.0-20250224083451-65fa75e658d1/go.mod h1:I03MjvHY7KSKZcneq+f53D69dFYp/38hO+5ze+t/wls=
+github.com/synesissoftware/ANGoLS v0.6.0-alpha1 h1:4VVkWBZmNRhX4vkWczZHb13C6G8ZnAAofAUtCvdhGzY=
+github.com/synesissoftware/ANGoLS v0.6.0-alpha1/go.mod h1:I03MjvHY7KSKZcneq+f53D69dFYp/38hO+5ze+t/wls=
 github.com/synesissoftware/STEGoL v0.2.0 h1:WdDUtUHFJP4uqwGFoUH/b0Bc/+u4a36KNGAsw2JgM4w=
 github.com/synesissoftware/STEGoL v0.2.0/go.mod h1:fLXaHg0WlvcjPSX669XZWm+FNyU6ezvGoEWmWSc6I8A=
 github.com/synesissoftware/ver2go v0.0.0-alpha3 h1:H/aLEs3v6xdZx4ir8pNJpNr44bXvI+Vt1MsA43ZZX6E=

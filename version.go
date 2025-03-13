@@ -4,7 +4,7 @@
 
 /*
  * Created: 25th February 2025
- * Updated: 1st March 2025
+ * Updated: 13th March 2025
  */
 
 package libpath
@@ -26,3 +26,5 @@ var (
 func VersionString() string {
 	return versionString
 }
+
+/* ///////////////////////////// end of file //////////////////////////// */

@@ -1,7 +1,7 @@
 package windows_test
 
 import (
-	windows "github.com/synesissoftware/libpath.Go/util/windows"
+	"github.com/synesissoftware/libpath.Go/util/windows"
 
 	"github.com/stretchr/testify/require"
 

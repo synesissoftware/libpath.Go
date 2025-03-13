@@ -1,7 +1,7 @@
 package util_test
 
 import (
-	util "github.com/synesissoftware/libpath.Go/util"
+	"github.com/synesissoftware/libpath.Go/util"
 
 	"github.com/stretchr/testify/require"
 

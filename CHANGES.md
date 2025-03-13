@@ -1,20 +1,10 @@
-# libpath.Go - CHANGES <!-- omit in toc -->
-
-Path parsing library, for Go
-
-## Table of contents <!-- omit in toc -->
-
-- [Section-1](#section-1)
-- [Section-2](#section-2)
+# **libpath.Go** Changes <!-- omit in toc -->
 
 
-## Section-1
+## 0.1.0 - 16th March 2025
 
-T.B.C.
+FIRST PUBLIC RELEASE
 
 
-## Section-2
-
-T.B.C.
-
+<!-- ########################### end of file ########################### -->
 

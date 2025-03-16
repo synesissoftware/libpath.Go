@@ -4,7 +4,7 @@
 
 /*
  * Created: 25th February 2025
- * Updated: 13th March 2025
+ * Updated: 16th March 2025
  */
 
 package libpath
@@ -15,7 +15,7 @@ const (
 	VersionMajor uint16 = 0
 	VersionMinor uint16 = 0
 	VersionPatch uint16 = 0
-	VersionAB    uint16 = 0x0004
+	VersionAB    uint16 = 0x0005
 	Version      uint64 = (uint64(VersionMajor) << 48) + (uint64(VersionMinor) << 32) + (uint64(VersionPatch) << 16) + (uint64(VersionAB) << 0)
 )
 

@@ -1,10 +1,17 @@
+// Copyright 2019-2025, Matthew Wilson and Synesis Information Systems. All
+// rights reserved. Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 //go:build unix
+
+/*
+ * Created: 25th February 2025
+ * Updated: 14th August 2025
+ */
 
 package util
 
-import (
-	"github.com/synesissoftware/libpath.Go/util/unix"
-)
+import "github.com/synesissoftware/libpath.Go/util/unix"
 
 func Basename(path string) string {
 	return unix.Basename(path)

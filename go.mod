@@ -4,7 +4,7 @@ go 1.23.6
 
 require (
 	github.com/stretchr/testify v1.10.0
-	github.com/synesissoftware/ANGoLS v0.0.0-20250224083451-65fa75e658d1
+	github.com/synesissoftware/ANGoLS v0.6.0-alpha3
 	github.com/synesissoftware/ver2go v0.1.1
 )
 

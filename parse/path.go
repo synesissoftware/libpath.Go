@@ -1,10 +1,20 @@
+// Copyright 2019-2025, Matthew Wilson and Synesis Information Systems. All
+// rights reserved. Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+/*
+ * Created: 25th February 2025
+ * Updated: 14th August 2025
+ */
+
 package parse
 
 import (
-	angols_strings "github.com/synesissoftware/ANGoLS/strings"
-	lp_util "github.com/synesissoftware/libpath.Go/util"
+	util "github.com/synesissoftware/libpath.Go/util"
 
-	"strings"
+	angols_strings "github.com/synesissoftware/ANGoLS/strings"
+
+	std_strings "strings"
 )
 
 // Type describing any file-system path in terms of its specific attributes,
@@ -29,9 +39,9 @@ type PathDescriptor struct {
 	FullPath       string   // The fullest esablishable form of the input.
 	Location       string   // The fullest esablishable form of the location of the entry, which is everything up-to-and-including the last (if any) path-name separator.
 	Root           string   // The path root, if present.
-	Directory      string   // The path directory, which excluses the `Root` (if any) and the `Entry` (if any).
+	Directory      string   // The path directory, which excluses the `Root` (if any) and the `EntryName` (if any).
 	DirectoryParts []string // Array of the `directory` elements, split on the path-name separator.
-	Entry          string   // The "file part", if any, which occurs after the last (if any) path-name separator.
+	EntryName      string   // The "file part", if any, which occurs after the last (if any) path-name separator. In many respects this is the same as Unix "base name", except that parsing a path with a trailing path-name-separator will _always_ results in an empty `EntryName`
 	Stem           string   // The stem of the "file part", if any.
 	Extension      string   // The extension of the "file part", if any.
 }
@@ -88,12 +98,12 @@ func elementEndsWithPathNameSeparator(s string) bool {
 		return false
 	default:
 
-		return lp_util.ByteIsPathElementSeparator(s[len(s)-1])
+		return util.ByteIsPathElementSeparator(s[len(s)-1])
 	}
 }
 
 func simplePathSplitFully(path string) ([]string, error) {
-	return strings.SplitAfter(path, "/"), nil
+	return std_strings.SplitAfter(path, "/"), nil
 }
 
 func simplePathSplit(path string) (string, []string, string, error) {
@@ -132,7 +142,7 @@ func simplePathSplit(path string) (string, []string, string, error) {
 }
 
 func simplePathJoin(elems ...string) string {
-	var b strings.Builder
+	var b std_strings.Builder
 
 	b.Grow(256) // just a guess for now
 
@@ -174,7 +184,7 @@ func createPathDescriptor(path string, ref_dir string) (PathDescriptor, error) {
 	pd.input = path
 	full_path := path
 
-	if !lp_util.PathIsAbsolute(path) && 0 != len(ref_dir) {
+	if !util.PathIsAbsolute(path) && 0 != len(ref_dir) {
 		full_path = simplePathJoin(ref_dir, path)
 	}
 
@@ -182,8 +192,8 @@ func createPathDescriptor(path string, ref_dir string) (PathDescriptor, error) {
 
 	directory := simplePathJoin(directory_parts...)
 	location := simplePathJoin(root, directory)
-	file_base := lp_util.Basename(file_part)
-	file_stem, file_ext := lp_util.SplitBasename(file_base)
+	file_base := util.Basename(file_part)
+	file_stem, file_ext := util.SplitBasename(file_base)
 
 	// pd.input
 	pd.FullPath = full_path
@@ -191,7 +201,7 @@ func createPathDescriptor(path string, ref_dir string) (PathDescriptor, error) {
 	pd.Root = root
 	pd.Directory = directory
 	pd.DirectoryParts = directory_parts
-	pd.Entry = file_base
+	pd.EntryName = file_base
 	pd.Stem = file_stem
 	pd.Extension = file_ext
 

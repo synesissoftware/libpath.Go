@@ -1,20 +1,16 @@
-# libpath.Go - CHANGES <!-- omit in toc -->
-
-Path parsing library, for Go
-
-## Table of contents <!-- omit in toc -->
-
-- [Section-1](#section-1)
-- [Section-2](#section-2)
+# **libpath.Go** - CHANGES <!-- omit in toc -->
 
 
-## Section-1
+## 0.0.0.4 - 13th August 2025
 
-T.B.C.
+* added **examples/libver**;
+* boilerplate;
 
 
-## Section-2
+## 0.0.0.2 - 23rd February 2025
 
-T.B.C.
+* initial release;
 
+
+<!-- ########################### end of file ########################### -->
 

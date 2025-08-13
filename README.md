@@ -1,13 +1,16 @@
 # libpath.Go <!-- omit in toc -->
-**C**ommand-**L**ine **A**rgument **S**orting and **P**arsing for Go
+
+[![GitHub release](https://img.shields.io/github/v/release/synesissoftware/libpath.Go.svg)](https://github.com/synesissoftware/libpath.Go/releases/latest)
+[![Go Reference](https://pkg.go.dev/badge/github.com/synesissoftware/libpath.Go.svg)](https://pkg.go.dev/github.com/synesissoftware/libpath.Go)
+[![Go Report Card](https://goreportcard.com/badge/github.com/synesissoftware/libpath.Go)](https://goreportcard.com/report/github.com/synesissoftware/libpath.Go)
+[![Last Commit](https://img.shields.io/github/last-commit/synesissoftware/libpath.Go)](https://github.com/synesissoftware/libpath.Go/commits/master)
+
+Path parsing library, for Go
 
 
 ## Introduction
 
-**libpath** stands for **C**ommand-**L**ine **A**rgument **S**orting and
-**P**arsing. The first libpath library was a C library with a C++ wrapper. There
-have been [several implementations in other languages](#related-projects). **libpath.Go** is the
-Go version.
+**libpath** is a multi-platform path parsing library. The first libpath library was a C library with a C++ wrapper. There have been [several implementations in other languages](#related-projects). **libpath.Go** is the Go version.
 
 
 ## Table of Contents <!-- omit in toc -->

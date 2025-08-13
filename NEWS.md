@@ -1,8 +1,9 @@
-# libpath - News <!-- omit in toc -->
+# libpath.Go - News <!-- omit in toc -->
 
 | Date                  | News Item                                     |
 | --------------------- | --------------------------------------------- |
-| 16th March 2025       | Release of 0.0.1 (beta 1)                     |
+| 13th August 2025      | Release of 0.0.0.4                            |
+| 23rd February 2025    | Release of 0.0.0.2                            |
 
 
 <!-- ########################### end of file ########################### -->

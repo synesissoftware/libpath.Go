@@ -14,14 +14,14 @@ import (
 func checkPathDescriptorElements(t *testing.T, pd parse.PathDescriptor) {
 	t.Helper()
 
-	// Stem + Extension => Entry
+	// Stem + Extension => EntryName
 	{
-		require.Equal(t, pd.Entry, pd.Stem+pd.Extension)
+		require.Equal(t, pd.EntryName, pd.Stem+pd.Extension)
 	}
 
-	// Location + Entry => FullPath
+	// Location + EntryName => FullPath
 	{
-		require.Equal(t, pd.FullPath, pd.Location+pd.Entry)
+		require.Equal(t, pd.FullPath, pd.Location+pd.EntryName)
 	}
 
 	// Root + Directory + Stem + Extension => FullPath
@@ -44,7 +44,7 @@ func Test_Windows_EMPTY_PATH(t *testing.T) {
 		require.Equal(t, "", pd.Root)
 		require.Equal(t, "", pd.Directory)
 		require.Equal(t, 0, len(pd.DirectoryParts))
-		require.Equal(t, "", pd.Entry)
+		require.Equal(t, "", pd.EntryName)
 		require.Equal(t, "", pd.Stem)
 		require.Equal(t, "", pd.Extension)
 
@@ -64,7 +64,7 @@ func Test_Windows_VOLUME_ROOTED_COMPLETE_PATHS(t *testing.T) {
 		require.Equal(t, "dir\\", pd.Directory)
 		require.Equal(t, 1, len(pd.DirectoryParts))
 		require.Equal(t, []string{"dir\\"}, pd.DirectoryParts)
-		require.Equal(t, "file.ext", pd.Entry)
+		require.Equal(t, "file.ext", pd.EntryName)
 		require.Equal(t, "file", pd.Stem)
 		require.Equal(t, ".ext", pd.Extension)
 
@@ -82,7 +82,7 @@ func Test_Windows_VOLUME_ROOTED_COMPLETE_PATHS(t *testing.T) {
 		require.Equal(t, "dir/", pd.Directory)
 		require.Equal(t, 1, len(pd.DirectoryParts))
 		require.Equal(t, []string{"dir/"}, pd.DirectoryParts)
-		require.Equal(t, "file.ext", pd.Entry)
+		require.Equal(t, "file.ext", pd.EntryName)
 		require.Equal(t, "file", pd.Stem)
 		require.Equal(t, ".ext", pd.Extension)
 
@@ -102,7 +102,7 @@ func Test_Windows_VOLUME_ROOTED_DIRECTORY(t *testing.T) {
 		require.Equal(t, "dir\\", pd.Directory)
 		require.Equal(t, 1, len(pd.DirectoryParts))
 		require.Equal(t, []string{"dir\\"}, pd.DirectoryParts)
-		require.Equal(t, "", pd.Entry)
+		require.Equal(t, "", pd.EntryName)
 		require.Equal(t, "", pd.Stem)
 		require.Equal(t, "", pd.Extension)
 
@@ -120,7 +120,7 @@ func Test_Windows_VOLUME_ROOTED_DIRECTORY(t *testing.T) {
 		require.Equal(t, "dir/", pd.Directory)
 		require.Equal(t, 1, len(pd.DirectoryParts))
 		require.Equal(t, []string{"dir/"}, pd.DirectoryParts)
-		require.Equal(t, "", pd.Entry)
+		require.Equal(t, "", pd.EntryName)
 		require.Equal(t, "", pd.Stem)
 		require.Equal(t, "", pd.Extension)
 
@@ -139,7 +139,7 @@ func Test_Windows_VOLUME_ROOTED_FILES(t *testing.T) {
 		require.Equal(t, "C:\\", pd.Root)
 		require.Equal(t, "", pd.Directory)
 		require.Equal(t, 0, len(pd.DirectoryParts))
-		require.Equal(t, "file.ext", pd.Entry)
+		require.Equal(t, "file.ext", pd.EntryName)
 		require.Equal(t, "file", pd.Stem)
 		require.Equal(t, ".ext", pd.Extension)
 
@@ -156,7 +156,7 @@ func Test_Windows_VOLUME_ROOTED_FILES(t *testing.T) {
 		require.Equal(t, "C:/", pd.Root)
 		require.Equal(t, "", pd.Directory)
 		require.Equal(t, 0, len(pd.DirectoryParts))
-		require.Equal(t, "file.ext", pd.Entry)
+		require.Equal(t, "file.ext", pd.EntryName)
 		require.Equal(t, "file", pd.Stem)
 		require.Equal(t, ".ext", pd.Extension)
 
@@ -175,7 +175,7 @@ func Test_Windows_VOLUME_ONLY(t *testing.T) {
 		require.Equal(t, "C:\\", pd.Root)
 		require.Equal(t, "", pd.Directory)
 		require.Equal(t, 0, len(pd.DirectoryParts))
-		require.Equal(t, "", pd.Entry)
+		require.Equal(t, "", pd.EntryName)
 		require.Equal(t, "", pd.Stem)
 		require.Equal(t, "", pd.Extension)
 
@@ -192,7 +192,7 @@ func Test_Windows_VOLUME_ONLY(t *testing.T) {
 		require.Equal(t, "C:/", pd.Root)
 		require.Equal(t, "", pd.Directory)
 		require.Equal(t, 0, len(pd.DirectoryParts))
-		require.Equal(t, "", pd.Entry)
+		require.Equal(t, "", pd.EntryName)
 		require.Equal(t, "", pd.Stem)
 		require.Equal(t, "", pd.Extension)
 

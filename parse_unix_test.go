@@ -14,14 +14,14 @@ import (
 func checkPathDescriptorElements(t *testing.T, pd parse.PathDescriptor) {
 	t.Helper()
 
-	// Stem + Extension => Entry
+	// Stem + Extension => EntryName
 	{
-		require.Equal(t, pd.Entry, pd.Stem+pd.Extension)
+		require.Equal(t, pd.EntryName, pd.Stem+pd.Extension)
 	}
 
-	// Location + Entry => FullPath
+	// Location + EntryName => FullPath
 	{
-		require.Equal(t, pd.FullPath, pd.Location+pd.Entry)
+		require.Equal(t, pd.FullPath, pd.Location+pd.EntryName)
 	}
 
 	// Root + Directory + Stem + Extension => FullPath
@@ -44,7 +44,7 @@ func Test_UNIX_EMPTY_PATH(t *testing.T) {
 		require.Equal(t, "", pd.Root)
 		require.Equal(t, "", pd.Directory)
 		require.Equal(t, 0, len(pd.DirectoryParts))
-		require.Equal(t, "", pd.Entry)
+		require.Equal(t, "", pd.EntryName)
 		require.Equal(t, "", pd.Stem)
 		require.Equal(t, "", pd.Extension)
 

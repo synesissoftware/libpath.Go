@@ -39,9 +39,9 @@ type PathDescriptor struct {
 	FullPath       string   // The fullest esablishable form of the input.
 	Location       string   // The fullest esablishable form of the location of the entry, which is everything up-to-and-including the last (if any) path-name separator.
 	Root           string   // The path root, if present.
-	Directory      string   // The path directory, which excluses the `Root` (if any) and the `Entry` (if any).
+	Directory      string   // The path directory, which excluses the `Root` (if any) and the `EntryName` (if any).
 	DirectoryParts []string // Array of the `directory` elements, split on the path-name separator.
-	Entry          string   // The "file part", if any, which occurs after the last (if any) path-name separator.
+	EntryName      string   // The "file part", if any, which occurs after the last (if any) path-name separator. In many respects this is the same as Unix "base name", except that parsing a path with a trailing path-name-separator will _always_ results in an empty `EntryName`
 	Stem           string   // The stem of the "file part", if any.
 	Extension      string   // The extension of the "file part", if any.
 }
@@ -201,7 +201,7 @@ func createPathDescriptor(path string, ref_dir string) (PathDescriptor, error) {
 	pd.Root = root
 	pd.Directory = directory
 	pd.DirectoryParts = directory_parts
-	pd.Entry = file_base
+	pd.EntryName = file_base
 	pd.Stem = file_stem
 	pd.Extension = file_ext
 

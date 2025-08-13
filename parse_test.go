@@ -12,14 +12,14 @@ import (
 func checkPathDescriptorElements(t *testing.T, pd parse.PathDescriptor) {
 	t.Helper()
 
-	// Stem + Extension => Entry
+	// Stem + Extension => EntryName
 	{
-		require.Equal(t, pd.Entry, pd.Stem+pd.Extension)
+		require.Equal(t, pd.EntryName, pd.Stem+pd.Extension)
 	}
 
-	// Location + Entry => FullPath
+	// Location + EntryName => FullPath
 	{
-		require.Equal(t, pd.FullPath, pd.Location+pd.Entry)
+		require.Equal(t, pd.FullPath, pd.Location+pd.EntryName)
 	}
 
 	// Root + Directory + Stem + Extension => FullPath
@@ -43,7 +43,7 @@ func Test_empty(t *testing.T) {
 		require.Equal(t, "", pd.Root)
 		require.Equal(t, "", pd.Directory)
 		require.Equal(t, 0, len(pd.DirectoryParts))
-		require.Equal(t, "", pd.Entry)
+		require.Equal(t, "", pd.EntryName)
 		require.Equal(t, "", pd.Stem)
 		require.Equal(t, "", pd.Extension)
 
@@ -64,7 +64,7 @@ func Test_dot(t *testing.T) {
 			require.Equal(t, "", pd.Root)
 			require.Equal(t, "", pd.Directory)
 			require.Equal(t, 0, len(pd.DirectoryParts))
-			require.Equal(t, ".", pd.Entry)
+			require.Equal(t, ".", pd.EntryName)
 			require.Equal(t, ".", pd.Stem)
 			require.Equal(t, "", pd.Extension)
 
@@ -81,7 +81,7 @@ func Test_dot(t *testing.T) {
 			require.Equal(t, "", pd.Root)
 			require.Equal(t, "", pd.Directory)
 			require.Equal(t, 0, len(pd.DirectoryParts))
-			require.Equal(t, "..", pd.Entry)
+			require.Equal(t, "..", pd.EntryName)
 			require.Equal(t, "..", pd.Stem)
 			require.Equal(t, "", pd.Extension)
 
@@ -98,7 +98,7 @@ func Test_dot(t *testing.T) {
 			require.Equal(t, "", pd.Root)
 			require.Equal(t, "", pd.Directory)
 			require.Equal(t, 0, len(pd.DirectoryParts))
-			require.Equal(t, "...", pd.Entry)
+			require.Equal(t, "...", pd.EntryName)
 			require.Equal(t, "...", pd.Stem)
 			require.Equal(t, "", pd.Extension)
 
@@ -115,7 +115,7 @@ func Test_dot(t *testing.T) {
 			require.Equal(t, "", pd.Root)
 			require.Equal(t, "", pd.Directory)
 			require.Equal(t, 0, len(pd.DirectoryParts))
-			require.Equal(t, ".....", pd.Entry)
+			require.Equal(t, ".....", pd.EntryName)
 			require.Equal(t, ".....", pd.Stem)
 			require.Equal(t, "", pd.Extension)
 
@@ -132,7 +132,7 @@ func Test_dot(t *testing.T) {
 			require.Equal(t, "", pd.Root)
 			require.Equal(t, "", pd.Directory)
 			require.Equal(t, 0, len(pd.DirectoryParts))
-			require.Equal(t, "..abc.def..", pd.Entry)
+			require.Equal(t, "..abc.def..", pd.EntryName)
 			require.Equal(t, "..abc.def..", pd.Stem)
 			require.Equal(t, "", pd.Extension)
 
@@ -155,7 +155,7 @@ func Test_Parse_Stem_only(t *testing.T) {
 		require.Equal(t, "", pd.Root)
 		require.Equal(t, "", pd.Directory)
 		require.Equal(t, 0, len(pd.DirectoryParts))
-		require.Equal(t, "abc", pd.Entry)
+		require.Equal(t, "abc", pd.EntryName)
 		require.Equal(t, "abc", pd.Stem)
 		require.Equal(t, "", pd.Extension)
 
@@ -172,7 +172,7 @@ func Test_Parse_Stem_only(t *testing.T) {
 		require.Equal(t, "/", pd.Root)
 		require.Equal(t, "", pd.Directory)
 		require.Equal(t, 0, len(pd.DirectoryParts))
-		require.Equal(t, "abc", pd.Entry)
+		require.Equal(t, "abc", pd.EntryName)
 		require.Equal(t, "abc", pd.Stem)
 		require.Equal(t, "", pd.Extension)
 
@@ -190,7 +190,7 @@ func Test_Parse_Stem_only(t *testing.T) {
 		require.Equal(t, "./", pd.Directory)
 		require.Equal(t, 1, len(pd.DirectoryParts))
 		require.Equal(t, []string{"./"}, pd.DirectoryParts)
-		require.Equal(t, "abc", pd.Entry)
+		require.Equal(t, "abc", pd.EntryName)
 		require.Equal(t, "abc", pd.Stem)
 		require.Equal(t, "", pd.Extension)
 
@@ -208,7 +208,7 @@ func Test_Parse_Stem_only(t *testing.T) {
 		require.Equal(t, "./", pd.Directory)
 		require.Equal(t, 1, len(pd.DirectoryParts))
 		require.Equal(t, []string{"./"}, pd.DirectoryParts)
-		require.Equal(t, "abc", pd.Entry)
+		require.Equal(t, "abc", pd.EntryName)
 		require.Equal(t, "abc", pd.Stem)
 		require.Equal(t, "", pd.Extension)
 
@@ -226,7 +226,7 @@ func Test_Parse_Stem_only(t *testing.T) {
 		require.Equal(t, "../", pd.Directory)
 		require.Equal(t, 1, len(pd.DirectoryParts))
 		require.Equal(t, []string{"../"}, pd.DirectoryParts)
-		require.Equal(t, "abc", pd.Entry)
+		require.Equal(t, "abc", pd.EntryName)
 		require.Equal(t, "abc", pd.Stem)
 		require.Equal(t, "", pd.Extension)
 
@@ -244,7 +244,7 @@ func Test_Parse_Stem_only(t *testing.T) {
 		require.Equal(t, "../", pd.Directory)
 		require.Equal(t, 1, len(pd.DirectoryParts))
 		require.Equal(t, []string{"../"}, pd.DirectoryParts)
-		require.Equal(t, "abc", pd.Entry)
+		require.Equal(t, "abc", pd.EntryName)
 		require.Equal(t, "abc", pd.Stem)
 		require.Equal(t, "", pd.Extension)
 
@@ -262,7 +262,7 @@ func Test_Parse_Stem_only(t *testing.T) {
 		require.Equal(t, "dir-1/dir-2/", pd.Directory)
 		require.Equal(t, 2, len(pd.DirectoryParts))
 		require.Equal(t, []string{"dir-1/", "dir-2/"}, pd.DirectoryParts)
-		require.Equal(t, "abc", pd.Entry)
+		require.Equal(t, "abc", pd.EntryName)
 		require.Equal(t, "abc", pd.Stem)
 		require.Equal(t, "", pd.Extension)
 
@@ -280,7 +280,7 @@ func Test_Parse_Stem_only(t *testing.T) {
 		require.Equal(t, "dir-1/dir-2/", pd.Directory)
 		require.Equal(t, 2, len(pd.DirectoryParts))
 		require.Equal(t, []string{"dir-1/", "dir-2/"}, pd.DirectoryParts)
-		require.Equal(t, "abc", pd.Entry)
+		require.Equal(t, "abc", pd.EntryName)
 		require.Equal(t, "abc", pd.Stem)
 		require.Equal(t, "", pd.Extension)
 
@@ -300,7 +300,7 @@ func Test_Parse_Basename_only(t *testing.T) {
 		require.Equal(t, "", pd.Root)
 		require.Equal(t, "", pd.Directory)
 		require.Equal(t, 0, len(pd.DirectoryParts))
-		require.Equal(t, "abc.ex", pd.Entry)
+		require.Equal(t, "abc.ex", pd.EntryName)
 		require.Equal(t, "abc", pd.Stem)
 		require.Equal(t, ".ex", pd.Extension)
 
@@ -317,7 +317,7 @@ func Test_Parse_Basename_only(t *testing.T) {
 		require.Equal(t, "/", pd.Root)
 		require.Equal(t, "", pd.Directory)
 		require.Equal(t, 0, len(pd.DirectoryParts))
-		require.Equal(t, "abc.ex", pd.Entry)
+		require.Equal(t, "abc.ex", pd.EntryName)
 		require.Equal(t, "abc", pd.Stem)
 		require.Equal(t, ".ex", pd.Extension)
 
@@ -335,7 +335,7 @@ func Test_Parse_Basename_only(t *testing.T) {
 		require.Equal(t, "./", pd.Directory)
 		require.Equal(t, 1, len(pd.DirectoryParts))
 		require.Equal(t, []string{"./"}, pd.DirectoryParts)
-		require.Equal(t, "abc.ex", pd.Entry)
+		require.Equal(t, "abc.ex", pd.EntryName)
 		require.Equal(t, "abc", pd.Stem)
 		require.Equal(t, ".ex", pd.Extension)
 
@@ -353,7 +353,7 @@ func Test_Parse_Basename_only(t *testing.T) {
 		require.Equal(t, "dir-1/dir-2/", pd.Directory)
 		require.Equal(t, 2, len(pd.DirectoryParts))
 		require.Equal(t, []string{"dir-1/", "dir-2/"}, pd.DirectoryParts)
-		require.Equal(t, "abc.ex", pd.Entry)
+		require.Equal(t, "abc.ex", pd.EntryName)
 		require.Equal(t, "abc", pd.Stem)
 		require.Equal(t, ".ex", pd.Extension)
 
@@ -371,7 +371,7 @@ func Test_Parse_Basename_only(t *testing.T) {
 		require.Equal(t, "dir-1/dir-2/", pd.Directory)
 		require.Equal(t, 2, len(pd.DirectoryParts))
 		require.Equal(t, []string{"dir-1/", "dir-2/"}, pd.DirectoryParts)
-		require.Equal(t, "abc.ex", pd.Entry)
+		require.Equal(t, "abc.ex", pd.EntryName)
 		require.Equal(t, "abc", pd.Stem)
 		require.Equal(t, ".ex", pd.Extension)
 
@@ -391,7 +391,7 @@ func Test_Parse_Extension_only(t *testing.T) {
 		require.Equal(t, "", pd.Root)
 		require.Equal(t, "", pd.Directory)
 		require.Equal(t, 0, len(pd.DirectoryParts))
-		require.Equal(t, ".ex", pd.Entry)
+		require.Equal(t, ".ex", pd.EntryName)
 		require.Equal(t, "", pd.Stem)
 		require.Equal(t, ".ex", pd.Extension)
 
@@ -408,7 +408,7 @@ func Test_Parse_Extension_only(t *testing.T) {
 		require.Equal(t, "/", pd.Root)
 		require.Equal(t, "", pd.Directory)
 		require.Equal(t, 0, len(pd.DirectoryParts))
-		require.Equal(t, ".ex", pd.Entry)
+		require.Equal(t, ".ex", pd.EntryName)
 		require.Equal(t, "", pd.Stem)
 		require.Equal(t, ".ex", pd.Extension)
 
@@ -426,7 +426,7 @@ func Test_Parse_Extension_only(t *testing.T) {
 		require.Equal(t, "./", pd.Directory)
 		require.Equal(t, 1, len(pd.DirectoryParts))
 		require.Equal(t, []string{"./"}, pd.DirectoryParts)
-		require.Equal(t, ".ex", pd.Entry)
+		require.Equal(t, ".ex", pd.EntryName)
 		require.Equal(t, "", pd.Stem)
 		require.Equal(t, ".ex", pd.Extension)
 
@@ -444,7 +444,7 @@ func Test_Parse_Extension_only(t *testing.T) {
 		require.Equal(t, "dir-1/dir-2/", pd.Directory)
 		require.Equal(t, 2, len(pd.DirectoryParts))
 		require.Equal(t, []string{"dir-1/", "dir-2/"}, pd.DirectoryParts)
-		require.Equal(t, ".ex", pd.Entry)
+		require.Equal(t, ".ex", pd.EntryName)
 		require.Equal(t, "", pd.Stem)
 		require.Equal(t, ".ex", pd.Extension)
 
@@ -462,7 +462,7 @@ func Test_Parse_Extension_only(t *testing.T) {
 		require.Equal(t, "dir-1/dir-2/", pd.Directory)
 		require.Equal(t, 2, len(pd.DirectoryParts))
 		require.Equal(t, []string{"dir-1/", "dir-2/"}, pd.DirectoryParts)
-		require.Equal(t, ".ex", pd.Entry)
+		require.Equal(t, ".ex", pd.EntryName)
 		require.Equal(t, "", pd.Stem)
 		require.Equal(t, ".ex", pd.Extension)
 
@@ -483,7 +483,7 @@ func Test_Parse_Directory_only(t *testing.T) {
 		require.Equal(t, "abc/", pd.Directory)
 		require.Equal(t, 1, len(pd.DirectoryParts))
 		require.Equal(t, []string{"abc/"}, pd.DirectoryParts)
-		require.Equal(t, "", pd.Entry)
+		require.Equal(t, "", pd.EntryName)
 		require.Equal(t, "", pd.Stem)
 		require.Equal(t, "", pd.Extension)
 
@@ -501,7 +501,7 @@ func Test_Parse_Directory_only(t *testing.T) {
 		require.Equal(t, "abc/", pd.Directory)
 		require.Equal(t, 1, len(pd.DirectoryParts))
 		require.Equal(t, []string{"abc/"}, pd.DirectoryParts)
-		require.Equal(t, "", pd.Entry)
+		require.Equal(t, "", pd.EntryName)
 		require.Equal(t, "", pd.Stem)
 		require.Equal(t, "", pd.Extension)
 
@@ -519,7 +519,7 @@ func Test_Parse_Directory_only(t *testing.T) {
 		require.Equal(t, "./abc/", pd.Directory)
 		require.Equal(t, 2, len(pd.DirectoryParts))
 		require.Equal(t, []string{"./", "abc/"}, pd.DirectoryParts)
-		require.Equal(t, "", pd.Entry)
+		require.Equal(t, "", pd.EntryName)
 		require.Equal(t, "", pd.Stem)
 		require.Equal(t, "", pd.Extension)
 
@@ -541,7 +541,7 @@ func Test_Parse_AbsolutePath_ensuring_ignoring_ReferenceDirectory(t *testing.T) 
 			require.Equal(t, "/", pd.Root)
 			require.Equal(t, "", pd.Directory)
 			require.Equal(t, 0, len(pd.DirectoryParts))
-			require.Equal(t, "", pd.Entry)
+			require.Equal(t, "", pd.EntryName)
 			require.Equal(t, "", pd.Stem)
 			require.Equal(t, "", pd.Extension)
 
@@ -558,7 +558,7 @@ func Test_Parse_AbsolutePath_ensuring_ignoring_ReferenceDirectory(t *testing.T) 
 			require.Equal(t, "/", pd.Root)
 			require.Equal(t, "", pd.Directory)
 			require.Equal(t, 0, len(pd.DirectoryParts))
-			require.Equal(t, "", pd.Entry)
+			require.Equal(t, "", pd.EntryName)
 			require.Equal(t, "", pd.Stem)
 			require.Equal(t, "", pd.Extension)
 
@@ -575,7 +575,7 @@ func Test_Parse_AbsolutePath_ensuring_ignoring_ReferenceDirectory(t *testing.T) 
 			require.Equal(t, "/", pd.Root)
 			require.Equal(t, "", pd.Directory)
 			require.Equal(t, 0, len(pd.DirectoryParts))
-			require.Equal(t, "", pd.Entry)
+			require.Equal(t, "", pd.EntryName)
 			require.Equal(t, "", pd.Stem)
 			require.Equal(t, "", pd.Extension)
 
@@ -596,7 +596,7 @@ func Test_Parse_AbsolutePath_ensuring_ignoring_ReferenceDirectory(t *testing.T) 
 			require.Equal(t, "dir-1/dir-2/", pd.Directory)
 			require.Equal(t, 2, len(pd.DirectoryParts))
 			require.Equal(t, []string{"dir-1/", "dir-2/"}, pd.DirectoryParts)
-			require.Equal(t, "", pd.Entry)
+			require.Equal(t, "", pd.EntryName)
 			require.Equal(t, "", pd.Stem)
 			require.Equal(t, "", pd.Extension)
 
@@ -614,7 +614,7 @@ func Test_Parse_AbsolutePath_ensuring_ignoring_ReferenceDirectory(t *testing.T) 
 			require.Equal(t, "dir-1/dir-2/", pd.Directory)
 			require.Equal(t, 2, len(pd.DirectoryParts))
 			require.Equal(t, []string{"dir-1/", "dir-2/"}, pd.DirectoryParts)
-			require.Equal(t, "", pd.Entry)
+			require.Equal(t, "", pd.EntryName)
 			require.Equal(t, "", pd.Stem)
 			require.Equal(t, "", pd.Extension)
 
@@ -632,7 +632,7 @@ func Test_Parse_AbsolutePath_ensuring_ignoring_ReferenceDirectory(t *testing.T) 
 			require.Equal(t, "dir-1/dir-2/", pd.Directory)
 			require.Equal(t, 2, len(pd.DirectoryParts))
 			require.Equal(t, []string{"dir-1/", "dir-2/"}, pd.DirectoryParts)
-			require.Equal(t, "", pd.Entry)
+			require.Equal(t, "", pd.EntryName)
 			require.Equal(t, "", pd.Stem)
 			require.Equal(t, "", pd.Extension)
 
@@ -653,7 +653,7 @@ func Test_Parse_AbsolutePath_ensuring_ignoring_ReferenceDirectory(t *testing.T) 
 			require.Equal(t, "dir-1/dir-2/", pd.Directory)
 			require.Equal(t, 2, len(pd.DirectoryParts))
 			require.Equal(t, []string{"dir-1/", "dir-2/"}, pd.DirectoryParts)
-			require.Equal(t, "file.ext", pd.Entry)
+			require.Equal(t, "file.ext", pd.EntryName)
 			require.Equal(t, "file", pd.Stem)
 			require.Equal(t, ".ext", pd.Extension)
 
@@ -671,7 +671,7 @@ func Test_Parse_AbsolutePath_ensuring_ignoring_ReferenceDirectory(t *testing.T) 
 			require.Equal(t, "dir-1/dir-2/", pd.Directory)
 			require.Equal(t, 2, len(pd.DirectoryParts))
 			require.Equal(t, []string{"dir-1/", "dir-2/"}, pd.DirectoryParts)
-			require.Equal(t, "file.ext", pd.Entry)
+			require.Equal(t, "file.ext", pd.EntryName)
 			require.Equal(t, "file", pd.Stem)
 			require.Equal(t, ".ext", pd.Extension)
 
@@ -689,7 +689,7 @@ func Test_Parse_AbsolutePath_ensuring_ignoring_ReferenceDirectory(t *testing.T) 
 			require.Equal(t, "dir-1/dir-2/", pd.Directory)
 			require.Equal(t, 2, len(pd.DirectoryParts))
 			require.Equal(t, []string{"dir-1/", "dir-2/"}, pd.DirectoryParts)
-			require.Equal(t, "file.ext", pd.Entry)
+			require.Equal(t, "file.ext", pd.EntryName)
 			require.Equal(t, "file", pd.Stem)
 			require.Equal(t, ".ext", pd.Extension)
 

@@ -1,9 +1,15 @@
-# **libpath.Go** Changes <!-- omit in toc -->
+# **libpath.Go** - CHANGES <!-- omit in toc -->
 
 
-## 0.1.0 - 16th March 2025
+## 0.0.0.4 - 13th August 2025
 
-FIRST PUBLIC RELEASE
+* added **examples/libver**;
+* boilerplate;
+
+
+## 0.0.0.2 - 23rd February 2025
+
+* initial release;
 
 
 <!-- ########################### end of file ########################### -->

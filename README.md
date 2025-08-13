@@ -8,18 +8,9 @@
 Path parsing library, for Go
 
 
-## Table of contents <!-- omit in toc -->
-
-- [Introduction](#introduction)
-- [Installation](#installation)
-
-
 ## Introduction
 
-**libpath** stands for **C**ommand-**L**ine **A**rgument **S**orting and
-**P**arsing. The first libpath library was a C library with a C++ wrapper. There
-have been [several implementations in other languages](#related-projects). **libpath.Go** is the
-Go version.
+**libpath** is a multi-platform path parsing library. The first libpath library was a C library with a C++ wrapper. There have been [several implementations in other languages](#related-projects). **libpath.Go** is the Go version.
 
 
 ## Table of Contents <!-- omit in toc -->
@@ -35,6 +26,7 @@ Go version.
 		- [Development/Testing Dependencies](#developmenttesting-dependencies)
 	- [Related projects](#related-projects)
 	- [License](#license)
+
 
 ## Installation
 

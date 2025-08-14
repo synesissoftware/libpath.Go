@@ -4,7 +4,7 @@
 
 /*
  * Created: 25th February 2025
- * Updated: 13th August 2025
+ * Updated: 14th August 2025
  */
 
 package parse
@@ -14,7 +14,7 @@ import (
 
 	angols_strings "github.com/synesissoftware/ANGoLS/strings"
 
-	"strings"
+	std_strings "strings"
 )
 
 // Type describing any file-system path in terms of its specific attributes,
@@ -103,7 +103,7 @@ func elementEndsWithPathNameSeparator(s string) bool {
 }
 
 func simplePathSplitFully(path string) ([]string, error) {
-	return strings.SplitAfter(path, "/"), nil
+	return std_strings.SplitAfter(path, "/"), nil
 }
 
 func simplePathSplit(path string) (string, []string, string, error) {
@@ -142,7 +142,7 @@ func simplePathSplit(path string) (string, []string, string, error) {
 }
 
 func simplePathJoin(elems ...string) string {
-	var b strings.Builder
+	var b std_strings.Builder
 
 	b.Grow(256) // just a guess for now
 

@@ -4,14 +4,12 @@
 
 /*
  * Created: 25th February 2025
- * Updated: 13th August 2025
+ * Updated: 14th August 2025
  */
 
 package windows
 
-import (
-	"strings"
-)
+import "strings"
 
 const (
 	PathElementSeparator    = '\\'

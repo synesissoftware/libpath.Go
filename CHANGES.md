@@ -1,6 +1,14 @@
 # **libpath.Go** - CHANGES <!-- omit in toc -->
 
 
+## 0.0.0.6 - 18th August 2025
+
+* GitHub Actions;
+* `interface{}` => `any`;
+* boilerplate;
+* documentation;
+
+
 ## 0.0.0.5 - 14th August 2025
 
 * OS tests;

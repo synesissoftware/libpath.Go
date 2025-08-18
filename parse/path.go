@@ -4,7 +4,7 @@
 
 /*
  * Created: 25th February 2025
- * Updated: 14th August 2025
+ * Updated: 18th August 2025
  */
 
 package parse
@@ -208,6 +208,6 @@ func createPathDescriptor(path string, ref_dir string) (PathDescriptor, error) {
 	return pd, nil
 }
 
-func ParsePathString(path string, reference_directory string /*, ... interface{}*/) (PathDescriptor, error) {
+func ParsePathString(path string, reference_directory string /*, ... any*/) (PathDescriptor, error) {
 	return createPathDescriptor(path, reference_directory)
 }

@@ -1,4 +1,4 @@
-package libpath
+package libpath_test
 
 import (
 	"github.com/synesissoftware/libpath.Go/parse"

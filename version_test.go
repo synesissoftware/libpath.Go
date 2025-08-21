@@ -1,7 +1,7 @@
 package libpath_test
 
 import (
-	"github.com/synesissoftware/libpath.Go"
+	libpath "github.com/synesissoftware/libpath.Go"
 
 	"github.com/stretchr/testify/require"
 
@@ -11,8 +11,8 @@ import (
 const (
 	Expected_VersionMajor uint16 = 0
 	Expected_VersionMinor uint16 = 0
-	Expected_VersionPatch uint16 = 0
-	Expected_VersionAB    uint16 = 6
+	Expected_VersionPatch uint16 = 1
+	Expected_VersionAB    uint16 = 0xFFFF
 )
 
 func Test_Version_Elements(t *testing.T) {
@@ -23,9 +23,9 @@ func Test_Version_Elements(t *testing.T) {
 }
 
 func Test_Version(t *testing.T) {
-	require.Equal(t, uint64(0x0000_0000_0000_0006), libpath.Version)
+	require.Equal(t, uint64(0x0000_0000_0001_FFFF), libpath.Version)
 }
 
 func Test_Version_String(t *testing.T) {
-	require.Equal(t, "0.0.0", libpath.VersionString())
+	require.Equal(t, "0.0.1", libpath.VersionString())
 }

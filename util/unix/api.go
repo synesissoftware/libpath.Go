@@ -4,12 +4,14 @@
 
 /*
  * Created: 25th February 2025
- * Updated: 13th August 2025
+ * Updated: 21st August 2025
  */
 
 package unix
 
-import "strings"
+import (
+	"strings"
+)
 
 const (
 	PathElementSeparator = '/'
@@ -17,7 +19,7 @@ const (
 )
 
 func Basename(path string) string {
-	ix := strings.LastIndexByte(path, '/')
+	ix := strings.LastIndexByte(path, PathElementSeparator)
 
 	if ix < 0 {
 		return path
@@ -27,17 +29,21 @@ func Basename(path string) string {
 }
 
 func ByteIsPathElementSeparator(c byte) bool {
-	return '/' == c
+	return PathElementSeparator == c
 }
 
 func CharIsPathElementSeparator(c rune) bool {
-	return '/' == c
+	return PathElementSeparator == c
 }
 
-func PathIsAbsolute(path string) bool {
-	if 0 == len(path) {
+// Evaluates whether a byte represents an invalid character in a path.
+func ByteIsInvalidInPath(c byte) bool {
+	switch c {
+	case '*', '<', '>', '?', '|':
+
+		return true
+	default:
+
 		return false
 	}
-
-	return ByteIsPathElementSeparator(path[0])
 }

@@ -1,7 +1,7 @@
 package windows_test
 
 import (
-	"github.com/synesissoftware/libpath.Go/util/windows"
+	api "github.com/synesissoftware/libpath.Go/util/windows"
 
 	"github.com/stretchr/testify/require"
 
@@ -10,39 +10,39 @@ import (
 
 func Test_Basename(t *testing.T) {
 	{
-		require.Equal(t, ".", windows.Basename("."))
+		require.Equal(t, ".", api.Basename("."))
 	}
 
 	{
-		require.Equal(t, "abc.ext", windows.Basename("abc.ext"))
-		require.Equal(t, "abc", windows.Basename("abc"))
-		require.Equal(t, ".ext", windows.Basename(".ext"))
+		require.Equal(t, "abc.ext", api.Basename("abc.ext"))
+		require.Equal(t, "abc", api.Basename("abc"))
+		require.Equal(t, ".ext", api.Basename(".ext"))
 	}
 
 	{
-		require.Equal(t, "abc.ext", windows.Basename("\\abc.ext"))
-		require.Equal(t, "abc", windows.Basename("\\abc"))
-		require.Equal(t, ".ext", windows.Basename("\\.ext"))
+		require.Equal(t, "abc.ext", api.Basename("\\abc.ext"))
+		require.Equal(t, "abc", api.Basename("\\abc"))
+		require.Equal(t, ".ext", api.Basename("\\.ext"))
 
-		require.Equal(t, "abc.ext", windows.Basename("/abc.ext"))
-		require.Equal(t, "abc", windows.Basename("/abc"))
-		require.Equal(t, ".ext", windows.Basename("/.ext"))
+		require.Equal(t, "abc.ext", api.Basename("/abc.ext"))
+		require.Equal(t, "abc", api.Basename("/abc"))
+		require.Equal(t, ".ext", api.Basename("/.ext"))
 	}
 
 	{
-		require.Equal(t, "abc.ext", windows.Basename("dir\\abc.ext"))
-		require.Equal(t, "abc", windows.Basename("dir\\abc"))
-		require.Equal(t, ".ext", windows.Basename("dir\\.ext"))
+		require.Equal(t, "abc.ext", api.Basename("dir\\abc.ext"))
+		require.Equal(t, "abc", api.Basename("dir\\abc"))
+		require.Equal(t, ".ext", api.Basename("dir\\.ext"))
 
-		require.Equal(t, "abc.ext", windows.Basename("dir/abc.ext"))
-		require.Equal(t, "abc", windows.Basename("dir/abc"))
-		require.Equal(t, ".ext", windows.Basename("dir/.ext"))
+		require.Equal(t, "abc.ext", api.Basename("dir/abc.ext"))
+		require.Equal(t, "abc", api.Basename("dir/abc"))
+		require.Equal(t, ".ext", api.Basename("dir/.ext"))
 	}
 
 	{
-		require.Equal(t, "abc.ext", windows.Basename("\\dir\\abc.ext"))
-		require.Equal(t, "abc.ext", windows.Basename("\\dir/abc.ext"))
-		require.Equal(t, "abc.ext", windows.Basename("/dir\\abc.ext"))
-		require.Equal(t, "abc.ext", windows.Basename("/dir/abc.ext"))
+		require.Equal(t, "abc.ext", api.Basename("\\dir\\abc.ext"))
+		require.Equal(t, "abc.ext", api.Basename("\\dir/abc.ext"))
+		require.Equal(t, "abc.ext", api.Basename("/dir\\abc.ext"))
+		require.Equal(t, "abc.ext", api.Basename("/dir/abc.ext"))
 	}
 }

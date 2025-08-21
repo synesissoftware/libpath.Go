@@ -4,12 +4,15 @@
 
 /*
  * Created: 25th February 2025
- * Updated: 14th August 2025
+ * Updated: 21st August 2025
  */
 
 package windows
 
-import "strings"
+import (
+	"strings"
+	"unicode"
+)
 
 const (
 	PathElementSeparator    = '\\'
@@ -18,7 +21,7 @@ const (
 )
 
 var (
-	_PathElementSeparators = []rune{
+	_PathElementSeparators = []byte{
 		PathElementSeparator,
 		PathElementSeparatorAlt,
 	}
@@ -37,7 +40,7 @@ func highestNonNegative(ix1, ix2 int) int {
 }
 
 func Basename(path string) string {
-	// TODO: reimplement this in terms of ANGoLS' LastIndexAnyByte
+	// TODO: reimplement this in terms of ANGoLS' LastIndexAnyByteAfter(path, _PathElementSeparators, -1)
 	// TODO: we need to detect (partial) UNC so as not to match a UNC share
 
 	ix_sep := strings.LastIndexByte(path, PathElementSeparator)
@@ -51,11 +54,29 @@ func Basename(path string) string {
 	}
 }
 
+func ByteIsValidDriveLetter(c byte) bool {
+	return unicode.IsLetter(rune(c))
+}
+
 func ByteIsPathElementSeparator(c byte) bool {
 	switch c {
 	case PathElementSeparator, PathElementSeparatorAlt:
+
 		return true
 	default:
+
+		return false
+	}
+}
+
+// Evaluates whether a byte represents an invalid character in a path.
+func ByteIsInvalidInPath(c byte) bool {
+	switch c {
+	case '"', '*', '<', '>', '?', '|':
+
+		return true
+	default:
+
 		return false
 	}
 }
@@ -63,16 +84,10 @@ func ByteIsPathElementSeparator(c byte) bool {
 func CharIsPathElementSeparator(c rune) bool {
 	switch c {
 	case PathElementSeparator, PathElementSeparatorAlt:
+
 		return true
 	default:
+
 		return false
 	}
-}
-
-func PathIsAbsolute(path string) bool {
-	if 0 == len(path) {
-		return false
-	}
-
-	return ByteIsPathElementSeparator(path[0])
 }

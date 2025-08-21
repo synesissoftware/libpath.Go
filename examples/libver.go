@@ -2,6 +2,7 @@ package main
 
 import (
 	libpath "github.com/synesissoftware/libpath.Go"
+
 	"github.com/synesissoftware/ver2go"
 
 	"fmt"

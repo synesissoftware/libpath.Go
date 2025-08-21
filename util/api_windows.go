@@ -6,25 +6,23 @@
 
 /*
  * Created: 25th February 2025
- * Updated: 14th August 2025
+ * Updated: 21st August 2025
  */
 
 package util
 
-import "github.com/synesissoftware/libpath.Go/util/windows"
+import (
+	os_api "github.com/synesissoftware/libpath.Go/util/windows"
+)
 
 func Basename(path string) string {
-	return windows.Basename(path)
+	return os_api.Basename(path)
 }
 
 func ByteIsPathElementSeparator(c byte) bool {
-	return windows.ByteIsPathElementSeparator(c)
+	return os_api.ByteIsPathElementSeparator(c)
 }
 
 func CharIsPathElementSeparator(c rune) bool {
-	return windows.CharIsPathElementSeparator(c)
-}
-
-func PathIsAbsolute(path string) bool {
-	return windows.PathIsAbsolute(path)
+	return os_api.CharIsPathElementSeparator(c)
 }

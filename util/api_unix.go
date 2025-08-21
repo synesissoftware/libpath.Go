@@ -6,25 +6,23 @@
 
 /*
  * Created: 25th February 2025
- * Updated: 14th August 2025
+ * Updated: 21st August 2025
  */
 
 package util
 
-import "github.com/synesissoftware/libpath.Go/util/unix"
+import (
+	os_api "github.com/synesissoftware/libpath.Go/util/unix"
+)
 
 func Basename(path string) string {
-	return unix.Basename(path)
+	return os_api.Basename(path)
 }
 
 func ByteIsPathElementSeparator(c byte) bool {
-	return unix.ByteIsPathElementSeparator(c)
+	return os_api.ByteIsPathElementSeparator(c)
 }
 
 func CharIsPathElementSeparator(c rune) bool {
-	return unix.CharIsPathElementSeparator(c)
-}
-
-func PathIsAbsolute(path string) bool {
-	return unix.PathIsAbsolute(path)
+	return os_api.CharIsPathElementSeparator(c)
 }

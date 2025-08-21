@@ -8,7 +8,7 @@ import (
 	"testing"
 )
 
-func checkSplitBasename(t *testing.T, expected_stem string, expected_extension string, basename_to_split string) {
+func checkSplitBasename(t *testing.T, expected_stem, expected_extension, basename_to_split string) {
 	t.Helper()
 
 	actual_stem, actual_extension := util.SplitBasename(basename_to_split)

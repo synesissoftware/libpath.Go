@@ -1,4 +1,4 @@
-# **libpath.Go** - CHANGES <!-- omit in toc -->
+# libpath.Go - CHANGES <!-- omit in toc -->
 
 
 ## 0.0.1 - 21st August 2025

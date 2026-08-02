@@ -1,4 +1,4 @@
-# **libpath.Go** TODO <!-- omit in toc -->
+# libpath.Go - TODO <!-- omit in toc -->
 
 
 ## **libpath.Go** 0.0.x TODOs:

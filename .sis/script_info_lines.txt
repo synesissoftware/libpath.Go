@@ -1,0 +1,2 @@
+libpath.Go is a path parsing library for Go
+Copyright (c) 2019-2026, Matthew Wilson and Synesis Information Systems

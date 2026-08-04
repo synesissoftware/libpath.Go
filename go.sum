@@ -8,8 +8,6 @@ github.com/synesissoftware/ANGoLS v0.7.0-alpha1 h1:Ggeq+BcHuvEthXimNq6B/MfszHzcH
 github.com/synesissoftware/ANGoLS v0.7.0-alpha1/go.mod h1:zp/Fn1yPEUJuqaHgjLSLNj5Mo4Fqb184f2StCLsYAbw=
 github.com/synesissoftware/CLASP.Go v0.17.0-alpha2 h1:0mbyqSlKT5dDhR++qX1QoPvDYh3f7v1GoxHJnyF7Kj8=
 github.com/synesissoftware/CLASP.Go v0.17.0-alpha2/go.mod h1:T3VR9u4260Yzg4sQXU+6QJEt6sZhQBQCTsteumQluWE=
-github.com/synesissoftware/Diagnosticism.Go v0.6.1 h1:tHelgXBimcJbSr0fGK3BfB+vi+p7pAPmhloDCpidxUY=
-github.com/synesissoftware/Diagnosticism.Go v0.6.1/go.mod h1:7Q8r2++A8oG4ut/EN9ztBQlp6ZhEMtXgialQxEB5U7g=
 github.com/synesissoftware/STEGoL v0.2.0 h1:WdDUtUHFJP4uqwGFoUH/b0Bc/+u4a36KNGAsw2JgM4w=
 github.com/synesissoftware/STEGoL v0.2.0/go.mod h1:fLXaHg0WlvcjPSX669XZWm+FNyU6ezvGoEWmWSc6I8A=
 github.com/synesissoftware/libCLImate.Go v0.8.1 h1:cxIjITT4e835P7FtEb0UbfuKLYoGSoUvVQVHpnSae+c=

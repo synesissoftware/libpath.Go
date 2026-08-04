@@ -1,4 +1,4 @@
-package windows
+package windows_test
 
 import (
 	test_utils "github.com/synesissoftware/libpath.Go/internal/test_utils"

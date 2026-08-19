@@ -1,17 +1,26 @@
 # libpath.Go - TODO <!-- omit in toc -->
 
 
-## **libpath.Go** 0.0.x TODOs:
+## Table of Contents <!-- omit in toc -->
 
-* [ ] Flesh out all documentation;
+- [Functional improvements](#functional-improvements)
+- [Performance improvements](#performance-improvements)
+- [Packaging improvements](#packaging-improvements)
+
+
+## Functional improvements
+
 * [ ] All Windows root forms;
-* [ ] T.B.C.;
 
 
-## libpath 0.1+ TODOs:
+## Performance improvements
 
 * \<none>
 
 
-<!-- ########################### end of file ########################### -->
+## Packaging improvements
 
+* [ ] Flesh out all documentation;
+
+
+<!-- ########################### end of file ########################### -->

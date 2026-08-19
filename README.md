@@ -11,11 +11,6 @@ Path parsing library, for Go
 [![Go Reference](https://pkg.go.dev/badge/github.com/synesissoftware/libpath.Go.svg)](https://pkg.go.dev/github.com/synesissoftware/libpath.Go)
 
 
-## Introduction
-
-**libpath** is a multi-platform path parsing library. The first libpath library was a C library with a C++ wrapper. There have been [several implementations in other languages](#related-projects). **libpath.Go** is the Go version.
-
-
 ## Table of Contents <!-- omit in toc -->
 
 - [Introduction](#introduction)
@@ -29,6 +24,11 @@ Path parsing library, for Go
 		- [Development/Testing Dependencies](#developmenttesting-dependencies)
 	- [Related projects](#related-projects)
 	- [License](#license)
+
+
+## Introduction
+
+**libpath** is a multi-platform path parsing library. The first libpath library was a C library with a C++ wrapper. There have been [several implementations in other languages](#related-projects). **libpath.Go** is the Go version.
 
 
 ## Installation

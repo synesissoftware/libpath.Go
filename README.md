@@ -54,7 +54,13 @@ import "github.com/synesissoftware/libpath.Go"
 
 ## Components
 
-T.B.C.
+The library is organised into platform-specific parsing packages and shared types:
+
+* **`parse/unix`** — `ClassifyRoot()`, `ParsePathStringFlags()` for Unix path strings;
+* **`parse/windows`** — `ClassifyRoot()`, `ParsePathStringFlags()` for Windows path strings;
+* **`parse/common`** — shared `PathDescriptor`, `ParseFlags`, and related types.
+
+See [EXAMPLES.md](./EXAMPLES.md) and [examples/parse_path.md](./examples/parse_path.md) for parsing under ambient, Unix, and Windows interpretation.
 
 
 ## Examples

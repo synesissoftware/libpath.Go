@@ -166,7 +166,7 @@ func createPathDescriptor(path string, ref_dir string, parseFlags types.ParseFla
 	case types.Empty:
 
 		return types.PathDescriptor{}, nil
-	case types.UncRooted, types.HomeRooted, types.DriveLetterRooted:
+	case types.SlashRooted, types.UncRooted, types.HomeRooted, types.DriveLetterRooted:
 
 		directory, directoryParts, entryBasename, err := splitPathRootStripped(pathRootStripped)
 

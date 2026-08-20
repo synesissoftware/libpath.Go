@@ -1,17 +1,32 @@
 # libpath.Go - TODO <!-- omit in toc -->
 
 
-## **libpath.Go** 0.0.x TODOs:
+## Table of Contents <!-- omit in toc -->
 
-* [ ] Flesh out all documentation;
+- [Functional improvements](#functional-improvements)
+- [Performance improvements](#performance-improvements)
+- [Packaging improvements](#packaging-improvements)
+
+
+## Functional improvements
+
 * [ ] All Windows root forms;
-* [ ] T.B.C.;
 
 
-## libpath 0.1+ TODOs:
+## Performance improvements
 
 * \<none>
 
 
-<!-- ########################### end of file ########################### -->
+## Packaging improvements
 
+* [ ] Before the next official release: confirm **`go.mod`** (`go 1.21`) and the CI Go-version matrix, bump Synesis `require`s to newly published tags, then run **`go mod tidy`** (not against currently published tags). Prior Synesis Go releases, in order:
+  * **ver2go**;
+  * **STEGoL**;
+  * **ANGoLS**;
+  * **CLASP.Go**;
+  * **libCLImate.Go**;
+* [ ] Flesh out all documentation;
+
+
+<!-- ########################### end of file ########################### -->

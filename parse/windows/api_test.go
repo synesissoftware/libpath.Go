@@ -67,3 +67,15 @@ func Test_ClassifyRoot_1(t *testing.T) {
 		require.Equal(t, cr_case.FirstBadCharIndex, firstBadCharIndex, "actual firstBadCharIndex '%t' does not match expected firstBadCharIndex '%t' with input path '%s' and parseFlags '0x%08x'", firstBadCharIndex, cr_case.FirstBadCharIndex, cr_case.Path, cr_case.ParseFlags)
 	}
 }
+
+func Test_ParsePathString_SlashRooted_ignoring_ReferenceDirectory(t *testing.T) {
+
+	pd, err := api.ParsePathStringFlags("/", "abc", common.ParseFlags_None)
+
+	require.NoError(t, err)
+	require.Equal(t, "/", pd.FullPath)
+	require.Equal(t, "/", pd.Location)
+	require.Equal(t, "/", pd.Root)
+
+	test_utils.CheckPathDescriptorElements(t, pd)
+}

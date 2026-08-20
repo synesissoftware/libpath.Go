@@ -1,3 +1,5 @@
+// examples/parse_path/main.go
+
 package main
 
 import (

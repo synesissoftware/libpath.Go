@@ -7,13 +7,7 @@ Path parsing library, for Go
 [![GitHub release](https://img.shields.io/github/v/release/synesissoftware/libpath.Go.svg)](https://github.com/synesissoftware/libpath.Go/releases/latest)
 [![Last Commit](https://img.shields.io/github/last-commit/synesissoftware/libpath.Go)](https://github.com/synesissoftware/libpath.Go/commits/master)
 [![Go](https://github.com/synesissoftware/libpath.Go/actions/workflows/go.yml/badge.svg)](https://github.com/synesissoftware/libpath.Go/actions/workflows/go.yml)
-[![Go Report Card](https://goreportcard.com/badge/github.com/synesissoftware/libpath.Go)](https://goreportcard.com/report/github.com/synesissoftware/libpath.Go)
 [![Go Reference](https://pkg.go.dev/badge/github.com/synesissoftware/libpath.Go.svg)](https://pkg.go.dev/github.com/synesissoftware/libpath.Go)
-
-
-## Introduction
-
-**libpath** is a multi-platform path parsing library. The first libpath library was a C library with a C++ wrapper. There have been [several implementations in other languages](#related-projects). **libpath.Go** is the Go version.
 
 
 ## Table of Contents <!-- omit in toc -->
@@ -29,6 +23,11 @@ Path parsing library, for Go
 		- [Development/Testing Dependencies](#developmenttesting-dependencies)
 	- [Related projects](#related-projects)
 	- [License](#license)
+
+
+## Introduction
+
+**libpath** is a multi-platform path parsing library. The first libpath library was a C library with a C++ wrapper. There have been [several implementations in other languages](#related-projects). **libpath.Go** is the Go version.
 
 
 ## Installation
@@ -54,7 +53,13 @@ import "github.com/synesissoftware/libpath.Go"
 
 ## Components
 
-T.B.C.
+The library is organised into platform-specific parsing packages and shared types:
+
+* **`parse/unix`** — `ClassifyRoot()`, `ParsePathStringFlags()` for Unix path strings;
+* **`parse/windows`** — `ClassifyRoot()`, `ParsePathStringFlags()` for Windows path strings;
+* **`parse/common`** — shared `PathDescriptor`, `ParseFlags`, and related types.
+
+See [EXAMPLES.md](./EXAMPLES.md) and [examples/parse_path.md](./examples/parse_path.md) for parsing under ambient, Unix, and Windows interpretation.
 
 
 ## Examples

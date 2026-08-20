@@ -7,7 +7,6 @@ Path parsing library, for Go
 [![GitHub release](https://img.shields.io/github/v/release/synesissoftware/libpath.Go.svg)](https://github.com/synesissoftware/libpath.Go/releases/latest)
 [![Last Commit](https://img.shields.io/github/last-commit/synesissoftware/libpath.Go)](https://github.com/synesissoftware/libpath.Go/commits/master)
 [![Go](https://github.com/synesissoftware/libpath.Go/actions/workflows/go.yml/badge.svg)](https://github.com/synesissoftware/libpath.Go/actions/workflows/go.yml)
-[![Go Report Card](https://goreportcard.com/badge/github.com/synesissoftware/libpath.Go)](https://goreportcard.com/report/github.com/synesissoftware/libpath.Go)
 [![Go Reference](https://pkg.go.dev/badge/github.com/synesissoftware/libpath.Go.svg)](https://pkg.go.dev/github.com/synesissoftware/libpath.Go)
 
 

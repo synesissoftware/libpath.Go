@@ -8,13 +8,13 @@ Illustrates parsing path strings under ambient, Unix, and Windows interpretation
 
 ## Source
 
-See [examples/parse_path.go](./examples/parse_path.go).
+See [examples/parse_path/main.go](./examples/parse_path/main.go).
 
 
 ## Execution
 
 ```bash
-go run ./examples/parse_path.go
+go run ./examples/parse_path
 ```
 
 

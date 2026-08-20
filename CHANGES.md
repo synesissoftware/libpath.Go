@@ -8,6 +8,7 @@
 * updated **ver2go** to 0.2.0-beta1;
 * restructured examples into per-program subdirectories (`examples/<name>/main.go`) so `go test ./...` no longer collides on multiple `main`s;
 * added **examples/libver** program;
+* fixed Windows ambient parser ignoring **SlashRooted** paths when a reference directory is supplied;
 * CI modernisation (matrix + lint);
 * CI reliability fixes (macOS test linking; golangci-lint config verification disabled in CI);
 * boilerplate additions (scripts, markdown docs, project identity);
